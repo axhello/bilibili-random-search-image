@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>哔哩哔哩 - ( ゜- ゜)つロ  乾杯</title>
+    <link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
+</head>
+<style type="text/css">
+.index {
+    width: 100%;
+    box-sizing: border-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.box {
+	box-sizing: border-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex: 0 1 auto;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+	-webkit-flex-direction:column;
+	-ms-flex-direction:column;
+	flex-direction:column;
+	-webkit-flex-grow: 1;
+	-ms-flex-positive: 1;
+	flex-grow: 1;
+	-webkit-flex-shrink: 0;
+	-ms-flex-shrink: 0;
+	flex-shrink: 0;
+	-webkit-flex-basis: 12%;
+	-ms-flex-preferred-size: 12%;
+	flex-basis: 12%;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	max-width: 20%;
+	height: 200px;
+}
+</style>
+
+<body>
+    <div id="app">
+        <div class="index">
+            <div class="box" v-for="icon in list.data.fix">
+                <div class="item">
+                    <img :src="icon.icon">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
+    <script src="http://cdn.bootcss.com/vue-resource/0.7.0/vue-resource.min.js"></script>
+    <script>
+    new Vue({
+        el: '#app',
+        data: function() {
+            return {
+                list: []
+            }
+        },
+        ready: function() {
+            this.getIcons();
+        },
+        methods: {
+            getIcons: function() {
+                this.$http({
+                    url: '/api.php',
+                    method: 'GET'
+                }).then(function(res) {
+                    this.list = res;
+                    console.log(this.list.data.fix.length);
+                }, function(res) {
+                    // error callback
+                });
+            }
+        }
+    })
+    </script>
+</body>
+
+</html>

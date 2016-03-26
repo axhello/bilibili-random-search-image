@@ -1,2 +1,1 @@
-# bilibili-random-search-image
-B站随机关键词图片
+#bilibili-random-search-image
